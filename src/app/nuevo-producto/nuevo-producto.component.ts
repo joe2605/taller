@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators }
   from '@angular/forms';
 
-  import "rxjs/add/operator/debounceTime";
-  import 'rxjs/add/operator/filter';
+import "rxjs/add/operator/debounceTime";
+import 'rxjs/add/operator/filter';
+import { combineLatest } from 'rxjs/observable/combineLatest';
 
 @Component({
   selector: 'app-nuevo-producto',
@@ -47,15 +48,29 @@ export class NuevoProductoComponent implements OnInit {
 
 
     // debounce
-    this.formulario.controls.precio.valueChanges.debounceTime(2000).subscribe(
-      precio => {
-        console.log(precio);
-      //   this.formulario.controls.subtotal.setValue(
-      //     this.formulario.controls.precio.value *
-      //     this.formulario.controls.cantidad.value)
-      }
-    );
+    this.formulario.controls.precio.valueChanges
+      .debounceTime(2000)
+      .subscribe(
+        precio => {
+          console.log(precio);
+          //   this.formulario.controls.subtotal.setValue(
+          //     this.formulario.controls.precio.value *
+          //     this.formulario.controls.cantidad.value)
+        }
+      );
 
+
+    combineLatest(
+      this.formulario.controls.precio.valueChanges.debounceTime(2000),
+      this.formulario.controls.cantidad.valueChanges.debounceTime(2000)
+    ).subscribe(vs => {
+      var precio = vs[0];
+      var cantidad = vs[1];
+      console.log('precio:  ' + precio);
+      console.log('cantidad:  ' + cantidad);
+      console.log('------------')
+      this.formulario.controls.subtotal.setValue(precio * cantidad);
+    })
 
 
 
