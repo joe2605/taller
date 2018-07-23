@@ -7,6 +7,7 @@ import "rxjs/add/operator/debounceTime";
 import 'rxjs/add/operator/filter';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 
+
 @Component({
   selector: 'app-nuevo-producto',
   templateUrl: './nuevo-producto.component.html',
@@ -20,8 +21,9 @@ export class NuevoProductoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
     this.formulario = new FormGroup({
-      precio: new FormControl(null, Validators.required),
+      precio: new FormControl(null, [Validators.required, Validators.min(0), Validators.pattern(/^\d+$/)   ]),
       cantidad: new FormControl(),
       dscto: new FormControl(),
       subtotal: new FormControl()

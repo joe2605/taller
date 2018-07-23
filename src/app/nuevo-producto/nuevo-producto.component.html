@@ -1,6 +1,7 @@
 
 <!-- <pre>{{formulario.value|json}}</pre> -->
-<pre>{{formulario.controls.precio.value}}</pre>
+<pre>precio:{{formulario.controls.precio.value}}</pre>
+<pre>precio errors:{{formulario.controls.precio.errors|json}}</pre>
 <form [formGroup]="formulario" novalidate>
   <div class="form-row">
     <div class="form-group col-md-4">
@@ -8,6 +9,7 @@
       <input type="number" class="form-control" formControlName="precio">
       <div invalidmessage="precio" class="text-danger">
         <p *invalidType="'required'">Requerido.</p>
+        <p *invalidType="'min'">Valor mayor que 0.</p>
       </div>
     </div>
   </div>
@@ -15,6 +17,9 @@
     <div class="form-group col-md-4">
       <label for="">Cantidad</label>
       <input type="number" class="form-control" formControlName="cantidad">
+      <div invalidmessage="cantidad" class="text-danger">
+        <p *invalidType="'required'">Requerido.</p>
+      </div>
     </div>
   </div>
   <div class="form-row">
