@@ -21,7 +21,7 @@ export class NuevoProductoComponent implements OnInit {
 
   ngOnInit() {
     this.formulario = new FormGroup({
-      precio: new FormControl(),
+      precio: new FormControl(null, Validators.required),
       cantidad: new FormControl(),
       dscto: new FormControl(),
       subtotal: new FormControl()

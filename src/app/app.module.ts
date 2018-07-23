@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { UtilsModule } from './utils/utils.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -25,8 +26,8 @@ import { NuevoProductoComponent } from './nuevo-producto/nuevo-producto.componen
     BrowserModule,
     AppRoutingModule,
     HttpModule,
-//import{FormsModule,ReactiveFormsModule } from '@angular/forms';
-    
+    //import{FormsModule,ReactiveFormsModule } from '@angular/forms';
+    UtilsModule,
     FormsModule,
     ReactiveFormsModule
   ],
