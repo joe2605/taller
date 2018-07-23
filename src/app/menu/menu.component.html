@@ -1,0 +1,10 @@
+<pre>{{opciones|json}}</pre>
+
+<ul class="list-group">
+<li *ngFor="let opt of opciones"
+  class="list-group-item"
+  [routerLink]="opt.url"
+  >
+    {{opt.name}}
+</li>
+</ul>
