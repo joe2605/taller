@@ -1,15 +1,32 @@
-<form>
+
+<pre>{{formulario.value|json}}</pre>
+<form [formGroup]="formulario" novalidate>
   <div class="form-row">
     <div class="form-group col-md-4">
-      <label for="">Nombre</label>
-      <input type="text" class="form-control">
-    </div>
-    <div class="form-group col-md-4">
       <label for="">Precio</label>
-      <input type="number" class="form-control">
+      <input type="number" class="form-control" formControlName="precio">
     </div>
   </div>
   <div class="form-row">
-      <button type="submit" class="btn btn-primary" >Guardar</button>
+    <div class="form-group col-md-4">
+      <label for="">Cantidad</label>
+      <input type="number" class="form-control" formControlName="cantidad">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="">Dscto</label>
+      <input type="number" class="form-control" formControlName="dscto">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="">Subtotal</label>
+      <input type="number" class="form-control" formControlName="subtotal">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <button type="submit" class="btn btn-primary">Guardar</button>
   </div>
 </form>
