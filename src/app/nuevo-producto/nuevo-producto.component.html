@@ -2,7 +2,7 @@
 <!-- <pre>{{formulario.value|json}}</pre> -->
 <pre>precio:{{formulario.controls.precio.value}}</pre>
 <pre>precio errors:{{formulario.controls.precio.errors|json}}</pre>
-<form [formGroup]="formulario" novalidate>
+<form [formGroup]="formulario" novalidate (ngSubmit)="guardar()">
   <div class="form-row">
     <div class="form-group col-md-4">
       <label for="">Precio</label>

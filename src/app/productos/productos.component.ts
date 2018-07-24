@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductoService } from '../service/productoService';
+
 import { Http } from '@angular/http';
 import { map } from 'rxjs/operators';
 
@@ -10,15 +12,20 @@ import { map } from 'rxjs/operators';
 export class ProductosComponent implements OnInit {
 
   productos;
-  constructor(private http: Http) { }
+  constructor(private http: Http,
+    private productoService: ProductoService
+  ) { }
 
   ngOnInit() {
-    this.http.get('/api/prueba.json')
-    .pipe(
-      map(resp => resp.json())
-    ).subscribe(resp => {
-      this.productos = resp;
-    });
+    // this.http.get('/api/prueba.json')
+    //   .pipe(
+    //     map(resp => resp.json())
+    //   ).subscribe(resp => {
+    //     this.productos = resp;
+    //   });
+    this.productos = this.productoService.getAll();
+
   }
+
 
 }

@@ -18,9 +18,7 @@ export class NuevoProductoComponent implements OnInit {
   formulario;
 
 
-  constructor(productoService: ProductoService) {
-    alert(33);
-    debugger;
+  constructor(private productoService: ProductoService) {
 
   }
 
@@ -80,8 +78,17 @@ export class NuevoProductoComponent implements OnInit {
 
 
 
-
-
   }
+  // guardar4 = function() {
+  // }
+  // guardar() { };
+  guardar = () => {
+    alert(333);
+    debugger;
+    if (this.formulario.valid) {
+      this.productoService.save(this.formulario.value);
+    }
+  }
+
 
 }
