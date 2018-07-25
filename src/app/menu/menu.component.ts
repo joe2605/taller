@@ -22,9 +22,14 @@ export class MenuComponent implements OnInit {
         url: '/productos_nuevo'
 
       },
+      
       {
         name: 'Clientes',
         url: '/clientes'
+      },
+      {
+        name: 'Nuevo Cliente',
+        url: '/cliente_nuevo'
       }
     ];
   }

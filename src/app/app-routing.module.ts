@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from "./login/login.component";
 import { ProductosComponent } from "./productos/productos.component";
 import { NuevoProductoComponent } from "./nuevo-producto/nuevo-producto.component";
+import { NuevoClienteComponent } from './nuevo-cliente/nuevo-cliente.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'productos_nuevo',
     component: NuevoProductoComponent
+  },
+  {
+    path: 'cliente_nuevo',
+    component: NuevoClienteComponent
   }
 
 ];

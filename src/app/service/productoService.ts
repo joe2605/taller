@@ -7,11 +7,13 @@ export class ProductoService {
 
   items: Array<any>;
 
+
   constructor(http: Http) {
     this.items = [];
   }
 
-  getAll = () => { //http.get
+  getAll = () => {
+    //http.get
     return this.items;
   }
 

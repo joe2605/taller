@@ -1,0 +1,29 @@
+<!-- <pre>{{formulario.value|json}}</pre> -->
+<form [formGroup]="formulario" novalidate (ngSubmit)="guardar()">
+  <div class="form-row">
+    <div class="col-md-2">
+      <label for="" class="mb-0">Tipo Documento</label>
+      <select class="form-control" id="" formControlName="tipoDocumento">
+          <!-- <option  class="hint__content"  *ngFor="let td of tiposDocumentos"  [ngValue]="td.id">{{td.text}}</option> -->
+          <option  class="hint__content" value="DNI">DNI</option>
+          <option  class="hint__content" value="RUC">RUC</option>
+      </select>
+      <div invalidmessage="tipoDocumento" class="text-danger">
+        <p *invalidType="'required'">Dato Requerido.</p>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <pre>{{formulario.controls.nroDocumento.errors|json}}</pre>
+    <div class="form-group col-md-4">
+      <label for="">Nro Documento</label>
+      <input type="text" class="form-control" formControlName="nroDocumento">
+      <div invalidmessage="nroDocumento" class="text-danger">
+        <p *invalidType="'required'">Requerido.</p>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </div>
+</form>

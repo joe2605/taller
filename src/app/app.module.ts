@@ -13,7 +13,8 @@ import { MenuComponent } from './menu/menu.component';
 import { HttpModule } from '@angular/http';
 import { NuevoProductoComponent } from './nuevo-producto/nuevo-producto.component';
 
-import { ProductoService } from './service/productoService'
+import { ProductoService } from './service/productoService';
+import { NuevoClienteComponent } from './nuevo-cliente/nuevo-cliente.component'
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ProductoService } from './service/productoService'
     LoginComponent,
     ProductosComponent,
     MenuComponent,
-    NuevoProductoComponent
+    NuevoProductoComponent,
+    NuevoClienteComponent
   ],
   imports: [
     BrowserModule,
