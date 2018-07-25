@@ -1,0 +1,64 @@
+<ng-template #rt let-r="result" let-t="term">
+  {{r.nombre}}
+</ng-template>
+<pre>{{formulario.value|json}}</pre>
+<form [formGroup]="formulario" novalidate (ngSubmit)="guardar()">
+  <div class="form-row">
+    <div class="col-md-2">
+      <label for="" class="mb-0">Tipo Documento</label>
+      <select class="form-control" id="" formControlName="tipoDocumento">
+          <!-- <option  class="hint__content"  *ngFor="let td of tiposDocumentos"  [ngValue]="td.id">{{td.text}}</option> -->
+          <option  class="hint__content" value="DNI">DNI</option>
+          <option  class="hint__content" value="RUC">RUC</option>
+      </select>
+      <div invalidmessage="tipoDocumento" class="text-danger">
+        <p *invalidType="'required'">Dato Requerido.</p>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <pre>{{formulario.controls.nroDocumento.errors|json}}</pre>
+    <div class="form-group col-md-4">
+      <label for="">Nro Documento</label>
+      <input type="text" class="form-control" formControlName="nroDocumento">
+      <div invalidmessage="nroDocumento" class="text-danger">
+        <p *invalidType="'required'">Requerido.</p>
+      </div>
+    </div>
+  </div>
+
+  <pre>date:{{formulario.controls.date.errors|json}}</pre>
+
+  <div class="form-group">
+    <div class="input-group">
+      <input class="form-control" placeholder="yyyy-mm-dd"
+             name="dp" formControlName="date" ngbDatepicker #d="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+          <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="">Autocomplete</label>
+      <input id="typeahead-basic" type="text" class="form-control" formControlName="auto" [ngbTypeahead]="search" />
+      <!-- <input type="text" class="form-control" id="productoId" autofocus [class.is-invalid]="searchFailed" [(ngModel)]="model" [ngbTypeahead]="search" [inputFormatter]="formatter" [resultTemplate]="rt" placeholder="Busqueda" (selectItem)="selectItem($event)" /> -->
+
+      <div invalidmessage="nroDocumento" class="text-danger">
+        <p *invalidType="'required'">Requerido.</p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="form-row">
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </div>
+</form>

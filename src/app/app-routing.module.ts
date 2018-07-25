@@ -5,6 +5,8 @@ import { LoginComponent } from "./login/login.component";
 import { ProductosComponent } from "./productos/productos.component";
 import { NuevoProductoComponent } from "./nuevo-producto/nuevo-producto.component";
 import { NuevoClienteComponent } from './nuevo-cliente/nuevo-cliente.component';
+import { NgBootstrapTestsComponent } from './ng-bootstrap-tests/ng-bootstrap-tests.component';
+
 
 const routes: Routes = [
   {
@@ -22,6 +24,10 @@ const routes: Routes = [
   {
     path: 'cliente_nuevo',
     component: NuevoClienteComponent
+  },
+  {
+    path: 'prueba_ngb',
+    component: NgBootstrapTestsComponent
   }
 
 ];

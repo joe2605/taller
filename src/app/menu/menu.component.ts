@@ -22,7 +22,7 @@ export class MenuComponent implements OnInit {
         url: '/productos_nuevo'
 
       },
-      
+
       {
         name: 'Clientes',
         url: '/clientes'
@@ -30,6 +30,10 @@ export class MenuComponent implements OnInit {
       {
         name: 'Nuevo Cliente',
         url: '/cliente_nuevo'
+      },
+      {
+        name: 'Prueba',
+        url: '/prueba_ngb'
       }
     ];
   }
