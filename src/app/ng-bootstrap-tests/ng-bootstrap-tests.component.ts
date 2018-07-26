@@ -3,11 +3,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, filter } from 'rxjs/operators';
 import "rxjs/add/operator/debounceTime";
-import 'rxjs/add/operator/filter';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { ProductoService } from '../service/productoService'
+import { Http } from '@angular/http';
 
 const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado',
   'Connecticut', 'Delaware', 'District Of Columbia', 'Federated States Of Micronesia', 'Florida', 'Georgia',
@@ -18,14 +18,29 @@ const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'C
   'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Islands', 'Virginia',
   'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 
+const productos = [
+  { id: 1, nombre: 'Televisor', marca: { nombre: 'Samsung' }, precio: 344 },
+  { id: 2, nombre: 'Teclado', marca: { nombre: 'Lg' }, precio: 344 },
+  { id: 3, nombre: 'Laptop', marca: { nombre: 'Asus' }, precio: 344 },
+  { id: 4, nombre: 'Mouse', marca: { nombre: 'KKK' }, precio: 344 },
+  { id: 5, nombre: 'Proyector', marca: { nombre: 'ooo' }, precio: 344 },
+]
+
+
 @Component({
   templateUrl: './ng-bootstrap-tests.component.html',
 })
 export class NgBootstrapTestsComponent implements OnInit {
   formulario;
-  constructor() { }
+  notas;
+  constructor(
+    // productoSerice: ProductoService
+    private http: Http
+  ) { }
 
   ngOnInit() {
+    // productos=  productoSerice.getAll();
+
     this.formulario = new FormGroup({
       tipoDocumento: new FormControl(null, Validators.required),
       nroDocumento: new FormControl(),
@@ -51,15 +66,41 @@ export class NgBootstrapTestsComponent implements OnInit {
       });
   }
 
+  // formatter = (p: any) => p.nombre;
 
-  search = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(200),
-      distinctUntilChanged(),
-      map(term => term.length < 2 ? []
-        : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+  formateador = (p: any) => {
+    return p.nombre + p.precio
+  };
+
+  productoSeleccionado = (p) => {
+    alert('select: ' + p.item.id);
+    this.http.get('/api/notas' + p.item.id + '.json').pipe(
+      map(resp => resp.json())
+    ).subscribe(n => {
+      this.notas = n;
+
+    })
+  }
+
+
+
+  search = (text$: Observable<string>) => {
+    return text$.pipe(
+      debounceTime(500),
+      // distinctUntilChanged(),
+      filter(term => { return term.length >= 2 }),
+      map(term => {
+        // { id: 1, nombre: 'Televisor', precio: 344 },
+        // { id: 2, nombre: 'Teclado', precio: 344 },
+        return productos.filter(unEstado => {
+          return unEstado.nombre.toLowerCase().indexOf(term) > -1
+        })
+        // return ['DDDDD', 'EEEE']
+      })
     );
+  }
 
-
-
+  //   states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1
+  // )
+  // .slice(0, 10)
 }

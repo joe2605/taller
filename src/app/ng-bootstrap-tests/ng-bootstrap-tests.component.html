@@ -1,5 +1,5 @@
 <ng-template #rt let-r="result" let-t="term">
-  {{r.nombre}}
+  {{r.nombre}} {{r.marca.nombre}}
 </ng-template>
 <pre>{{formulario.value|json}}</pre>
 <form [formGroup]="formulario" novalidate (ngSubmit)="guardar()">
@@ -31,8 +31,7 @@
 
   <div class="form-group">
     <div class="input-group">
-      <input class="form-control" placeholder="yyyy-mm-dd"
-             name="dp" formControlName="date" ngbDatepicker #d="ngbDatepicker">
+      <input class="form-control" placeholder="yyyy-mm-dd" name="dp" formControlName="date" ngbDatepicker #d="ngbDatepicker">
       <div class="input-group-append">
         <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
           <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
@@ -45,16 +44,29 @@
   <div class="form-row">
     <div class="form-group col-md-4">
       <label for="">Autocomplete</label>
-      <input id="typeahead-basic" type="text" class="form-control" formControlName="auto" [ngbTypeahead]="search" />
+      <input id="typeahead-basic" type="text" class="form-control" formControlName="auto" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formateador" (selectItem)="productoSeleccionado($event)" />
       <!-- <input type="text" class="form-control" id="productoId" autofocus [class.is-invalid]="searchFailed" [(ngModel)]="model" [ngbTypeahead]="search" [inputFormatter]="formatter" [resultTemplate]="rt" placeholder="Busqueda" (selectItem)="selectItem($event)" /> -->
-
       <div invalidmessage="nroDocumento" class="text-danger">
         <p *invalidType="'required'">Requerido.</p>
       </div>
     </div>
   </div>
 
+  <pre>{{notas|json}}</pre>
+  <table class="table">
+    <thead>
+      <th>Tipo</th>
+      <th>Nota</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let no of  notas">
+        <td>{{no.tipoExamen}}</td>
+        <td>{{no.nota}}</td>
+      </tr>
 
+    </tbody>
+
+  </table>
 
 
 

@@ -27,6 +27,7 @@ import { NgBootstrapTestsComponent } from './ng-bootstrap-tests/ng-bootstrap-tes
     NuevoProductoComponent,
     NuevoClienteComponent,
     NgBootstrapTestsComponent
+    
   ],
   imports: [
     BrowserModule,
