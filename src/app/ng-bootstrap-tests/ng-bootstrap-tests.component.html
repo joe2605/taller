@@ -39,7 +39,8 @@
       </div>
     </div>
   </div>
-
+  <pre>{{valor|json}}</pre>
+  ddddddddd:<span>{{valor.cc}}</span>
 
   <div class="form-row">
     <div class="form-group col-md-4">
@@ -52,6 +53,26 @@
     </div>
   </div>
 
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="">Combo</label>
+      <select class="form-control" formControlName="combo">
+          <option value="1">A</option>
+          <option value="2">B</option>
+          <option value="3">C</option>
+      </select>
+      <!-- <input type="text" class="form-control" id="productoId" autofocus [class.is-invalid]="searchFailed" [(ngModel)]="model" [ngbTypeahead]="search" [inputFormatter]="formatter" [resultTemplate]="rt" placeholder="Busqueda" (selectItem)="selectItem($event)" /> -->
+      <div invalidmessage="nroDocumento" class="text-danger">
+        <p *invalidType="'required'">Requerido.</p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
   <pre>{{notas|json}}</pre>
   <table class="table">
     <thead>
@@ -59,15 +80,82 @@
       <th>Nota</th>
     </thead>
     <tbody>
-      <tr *ngFor="let no of  notas">
-        <td>{{no.tipoExamen}}</td>
-        <td>{{no.nota}}</td>
+      <tr *ngFor="let item of  notas">
+        <td>{{item.tipoExamen}}</td>
+        <td>{{item.nota}}</td>
+        <td>
+          <button type="button" name="button" (click)="verOpcion(item)">Opcion</button>
+
+        </td>
       </tr>
 
     </tbody>
 
   </table>
 
+
+  <table class="table">
+    <thead>
+      <th>Tipo</th>
+      <th>Nota</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of  otrosDatos">
+        <td>{{item.nombre}}</td>
+        <td>
+          <button type="button" name="button" (click)="verOpcion(item)">Opcion</button>
+        </td>
+      </tr>
+
+    </tbody>
+
+  </table>
+
+  <hr>
+  <hr>
+  <hr>
+  <hr>
+
+  <h1>FOrm LD</h1>
+  <pre>{{this.ldForm.value|json}}</pre>
+  <form [formGroup]="ldForm" novalidate (ngSubmit)="guardarLD()">
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="">C1</label>
+        <input type="text" class="form-control" formControlName="c1">
+        <!-- <input type="text" class="form-control" id="productoId" autofocus [class.is-invalid]="searchFailed" [(ngModel)]="model" [ngbTypeahead]="search" [inputFormatter]="formatter" [resultTemplate]="rt" placeholder="Busqueda" (selectItem)="selectItem($event)" /> -->
+        <div invalidmessage="nroDocumento" class="text-danger">
+          <p *invalidType="'required'">Requerido.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <button type="submit" name="button">ALD</button>
+    </div>
+
+
+
+  </form>
+
+
+  <h1>LIneas Detalles</h1>
+  <table class="table">
+    <thead>
+      <th>c1</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ld of lineasDetalles">
+        <td>{{ld.c1}}</td>
+        <td>
+          <button type="button" (click)="editarLd(ld,$index)" name="button">Editar</button>
+        </td>
+        <td>
+          <button type="button" (click)="editarLd(ld,$index)" name="button">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
 
   <div class="form-row">

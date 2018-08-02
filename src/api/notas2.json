@@ -1,8 +1,10 @@
 [{
+    "id": 1,
     "tipoExamen": "parcial",
     "nota": 15
   },
   {
+    "id": 1,
     "tipoExamen": "final",
     "nota": 10
   }

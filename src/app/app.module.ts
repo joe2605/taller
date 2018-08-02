@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -27,7 +28,7 @@ import { NgBootstrapTestsComponent } from './ng-bootstrap-tests/ng-bootstrap-tes
     NuevoProductoComponent,
     NuevoClienteComponent,
     NgBootstrapTestsComponent
-    
+
   ],
   imports: [
     BrowserModule,
@@ -42,4 +43,5 @@ import { NgBootstrapTestsComponent } from './ng-bootstrap-tests/ng-bootstrap-tes
   providers: [ProductoService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

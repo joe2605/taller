@@ -32,7 +32,9 @@ const productos = [
 })
 export class NgBootstrapTestsComponent implements OnInit {
   formulario;
+  ldForm;
   notas;
+  valor;
   constructor(
     // productoSerice: ProductoService
     private http: Http
@@ -45,8 +47,56 @@ export class NgBootstrapTestsComponent implements OnInit {
       tipoDocumento: new FormControl(null, Validators.required),
       nroDocumento: new FormControl(),
       date: new FormControl(),
-      auto: new FormControl()
+      auto: new FormControl(),
+      combo: new FormControl(null, Validators.required)
     });
+
+    this.formulario.controls.date.valueChanges
+      .subscribe(v => {
+        var modulo = v.day % 2;
+
+        if (modulo == 0) {
+          this.http.get('/api/n' + modulo + '.json').pipe(
+            map(resp => resp.json())
+          ).subscribe(n => {
+            this.valor = n;
+
+          })
+        } else {
+          this.http.get('/api/n' + modulo + '.json').pipe(
+            map(resp => resp.json())
+          ).subscribe(n => {
+            this.valor = n;
+
+          })
+
+        }
+
+
+      })
+
+
+
+
+
+
+    this.ldForm = new FormGroup({
+      c1: new FormControl(null, Validators.required),
+    });
+
+
+
+
+    this.formulario.controls.combo.valueChanges
+      .subscribe(v => {
+        this.http.get('/api/notas' + v + '.json').pipe(
+          map(resp => resp.json())
+        ).subscribe(n => {
+          this.notas = n;
+
+        })
+      })
+
 
     this.formulario.controls.tipoDocumento.valueChanges
       .subscribe(v => {
@@ -73,7 +123,7 @@ export class NgBootstrapTestsComponent implements OnInit {
   };
 
   productoSeleccionado = (p) => {
-    alert('select: ' + p.item.id);
+    alert('selectFFF: ' + p.item.id);
     this.http.get('/api/notas' + p.item.id + '.json').pipe(
       map(resp => resp.json())
     ).subscribe(n => {
@@ -81,8 +131,6 @@ export class NgBootstrapTestsComponent implements OnInit {
 
     })
   }
-
-
 
   search = (text$: Observable<string>) => {
     return text$.pipe(
@@ -99,8 +147,38 @@ export class NgBootstrapTestsComponent implements OnInit {
       })
     );
   }
+  otrosDatos;
+  verOpcion = (item) => {
+    alert(333);
+    debugger;
+    this.http.get('/api/otraConsulta' + item.id + '.json').pipe(
+      map(resp => resp.json())
+    ).subscribe(n => {
+      this.otrosDatos = n;
+    })
+  }
+
 
   //   states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1
   // )
   // .slice(0, 10)
+
+  lineasDetalles = [];
+  guardarLD = () => {
+    if (!this.ldForm.invalid) {
+      this.lineasDetalles.push(this.ldForm.value);
+      this.ldForm.reset();
+    } else
+      alert('invalido')
+  }
+
+  editarLd = (ld, index) => {
+    alert('editarLd');
+    debugger;
+    this.ldForm.controls.c1.setValue(ld.c1);
+
+  }
+
+
+
 }
